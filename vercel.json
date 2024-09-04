@@ -1,0 +1,35 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "backend/app.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "backend/api/(.*)",
+      "dest": "/app.js"
+    },
+    {
+      "src": "/auth/(.*)",
+      "dest": "/app.js"
+    },
+    {
+      "src": "/expenses/(.*)",
+      "dest": "/app.js"
+    },
+    {
+      "src": "/incomes/(.*)",
+      "dest": "/app.js"
+    },
+    {
+      "src": "./frontend/(.*)",
+      "dest": "/app.js"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "./backend/app.js"
+    }
+  ]
+}

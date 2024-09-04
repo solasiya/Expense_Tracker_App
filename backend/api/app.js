@@ -45,7 +45,7 @@ app.use('/incomes', incomeRoutes);
 // Default home page (login page)
 app.get('/', (req, res) => {
     debug('Serving login page');
-    res.sendFile(path.join(__dirname, '../frontend', 'login.html'));
+    res.sendFile(path.join(__dirname,'../frontend', 'login.html'));
 });
 
 // Serve static files (e.g., CSS, HTML)
@@ -62,4 +62,4 @@ app.listen(PORT, () => {
     debug(`Server running at http://localhost:${PORT}`);
 });
 
-module.exports = app
+module.exports = app;
