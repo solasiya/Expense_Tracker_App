@@ -49,7 +49,7 @@ app.get('/', (req, res) => {
 });
 
 // Serve static files (e.g., CSS, HTML)
-app.use(express.static(path.join(__dirname, '../frontend')));
+app.use(express.static(path.join(__dirname, '../frontend/')));
 
 // Handle 404 errors
 app.use((req, res) => {
@@ -57,9 +57,5 @@ app.use((req, res) => {
     res.status(404).send('Page not found');
 });
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-    debug(`Server running at http://localhost:${PORT}`);
-});
 
-module.exports = app
+module.exports = app;
