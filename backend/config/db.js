@@ -4,10 +4,10 @@ require("dotenv").config();
 
 // Create connection
 const db = mysql.createConnection({
-  host: 'autorack.proxy.rlwy.net',
-  port: '23395',
+  host: 'junction.proxy.rlwy.net',
+  port: '34196',
   user: 'root',
-  password: 'hXvUrlzwsKvgAeGWqYIltcDYOzMDGnKN',
+  password: 'NVDEiSZwGyoIVSaFCvWhXDmvDqyEiKfa',
   database: 'railway',
 });
 
