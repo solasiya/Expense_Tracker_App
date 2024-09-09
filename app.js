@@ -108,11 +108,11 @@ app.use('/incomes', (req, res, next) => {
 // Default home page (login page)
 app.get('/', (req, res) => {
     debug('Serving login page');
-    res.sendFile(path.join(__dirname, 'frontend/index.html'));
+    res.sendFile(path.join(__dirname, 'public/index.html'));
 });
 
 // Serve static files (e.g., CSS, HTML)
-app.use(express.static(path.join(__dirname, 'frontend')));
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Handle 404 errors
 app.use((req, res) => {
