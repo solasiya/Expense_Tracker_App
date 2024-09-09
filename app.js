@@ -25,11 +25,11 @@ function debug(message, details = {}) {
 
 // MySQL session store options
 const sessionStoreOptions = {
-    host: process.env.MYSQLHOST,
-    port: process.env.MYSQLPORT,
-    user: process.env.MYSQLUSER,
-    password: process.env.MYSQLPASSWORD,
-    database: process.env.MYSQLDATABASE,
+    host: 'junction.proxy.rlwy.net',
+  port: '34196',
+  user: 'root',
+  password: 'NVDEiSZwGyoIVSaFCvWhXDmvDqyEiKfa',
+  database: 'railway',
     clearExpired: true,
     checkExpirationInterval: 60000*5, // 1 minute*5 = 5 minutes   //Session Cleanup: Expired sessions are checked and removed every 5 minutes
     expiration: 60000*15, // 1 minute*15 = 15 minutes    //  Session Inactivity Expiration: The session will expire after 15 minutes of inactivity. 
