@@ -1,6 +1,6 @@
 {
     "scripts": {
-        "start": "app.js",
+        "start": "node app.js",
         "test": "mocha test/test.js"
     },
     "dependencies": {
