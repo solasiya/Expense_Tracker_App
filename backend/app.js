@@ -9,13 +9,14 @@ const path = require('path');
 require('dotenv').config();
 const cors = require ('cors');
 
+
+
+const app = express();
 app.use(cors({
     origin: 'expensetrackerapp-production-5806.up.railway.app',
     methods: ['GET', 'POST'],
     credentials: true
-}))
-
-const app = express();
+}));
 
 // Enhanced debug function
 function debug(message, details = {}) {
