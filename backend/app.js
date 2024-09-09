@@ -112,9 +112,9 @@ app.use((req, res) => {
     res.status(404).send('Page not found');
 });
 
-// const PORT = process.env.PORT || 5000;
-// app.listen(PORT, () => {
-//     debug(`Server running at http://localhost:${PORT}`);
-// });
+const PORT = process.env.MYSQLPORT || 5000;
+app.listen(PORT, () => {
+    debug(`Server running at http://localhost:${PORT}`);
+});
 
 module.exports = app;
