@@ -25,11 +25,11 @@ function debug(message, details = {}) {
 
 // MySQL session store options
 const sessionStoreOptions = {
-    host: 'junction.proxy.rlwy.net',
-  port: '34196',
-  user: 'root',
-  password: 'NVDEiSZwGyoIVSaFCvWhXDmvDqyEiKfa',
-  database: 'railway',
+    host: process.env.MYSQLHOST,
+    port: process.env.MYSQLPORT,
+    user: process.env.MYSQLUSER,
+    password: process.env.MYSQLPASSWORD,
+    database: process.env.MYSQLDATABASE,
     clearExpired: true,
     checkExpirationInterval: 60000*5, // 1 minute*5 = 5 minutes   //Session Cleanup: Expired sessions are checked and removed every 5 minutes
     expiration: 60000*15, // 1 minute*15 = 15 minutes    //  Session Inactivity Expiration: The session will expire after 15 minutes of inactivity. 
@@ -108,7 +108,7 @@ app.use('/incomes', (req, res, next) => {
 // Default home page (login page)
 app.get('/', (req, res) => {
     debug('Serving login page');
-    res.sendFile(path.join(__dirname, 'public/index.html'));
+    res.sendFile(path.join(__dirname, 'public/login.html'));
 });
 
 // Serve static files (e.g., CSS, HTML)
