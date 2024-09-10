@@ -7,20 +7,18 @@ const expenseRoutes = require('./routes/expenses');
 const incomeRoutes = require('./routes/incomes');
 const path = require('path');
 require('dotenv').config();
-const cors = require ('cors');
-
-
+const cors = require('cors');
 
 const app = express();
 app.use(cors({
-    origin: 'expensetrackerapp-production-5806.up.railway.app',
+    origin: '*', // Temporarily allow all origins for testing
     methods: ['GET', 'POST'],
     credentials: true
 }));
 
 // Enhanced debug function
 function debug(message, details = {}) {
-    console.log(`[SERVER] ${message}, JSON.stringify(details, null, 2)`);
+    console.log(`[SERVER] ${message}`, JSON.stringify(details, null, 2));
 }
 
 // MySQL session store options
@@ -31,8 +29,8 @@ const sessionStoreOptions = {
     password: process.env.MYSQLPASSWORD,
     database: process.env.MYSQLDATABASE,
     clearExpired: true,
-    checkExpirationInterval: 60000*5, // 1 minute*5 = 5 minutes   //Session Cleanup: Expired sessions are checked and removed every 5 minutes
-    expiration: 60000*15, // 1 minute*15 = 15 minutes    //  Session Inactivity Expiration: The session will expire after 15 minutes of inactivity. 
+    checkExpirationInterval: 60000 * 5, // Session cleanup every 5 minutes
+    expiration: 60000 * 15, // Session expires after 15 minutes of inactivity
 };
 
 // Create a session store
@@ -49,8 +47,8 @@ app.use(session({
     resave: false,
     saveUninitialized: false,
     cookie: {
-        secure: process.env.NODE_ENV === 'production', // set secure cookies in production
-        maxAge: 24 * 60 * 60 * 1000 // 24 hours  // Session Cookie Expiration: The session will expire after 24 hours if the user doesn't log out.
+        secure: process.env.NODE_ENV === 'production', // Set secure cookies in production
+        maxAge: 24 * 60 * 60 * 1000 // Session expires after 24 hours if user doesn't log out
     }
 }));
 
@@ -64,7 +62,7 @@ app.use((req, res, next) => {
 
     // Log response
     const originalJson = res.json;
-    res.json = function(body) {
+    res.json = function (body) {
         debug(`Sending response for ${req.method} ${req.url}`, {
             statusCode: res.statusCode,
             body: body
@@ -119,7 +117,13 @@ app.use((req, res) => {
     res.status(404).send('Page not found');
 });
 
-const port = 3306;
+// Error handling middleware
+app.use((err, req, res, next) => {
+    debug('Unhandled error occurred', { error: err.message });
+    res.status(500).send('Internal Server Error');
+});
+
+const port = process.env.PORT || 3000;
 app.listen(port, () => {
     debug(`Server running at http://localhost:${port}`);
 });
