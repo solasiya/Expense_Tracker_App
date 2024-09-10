@@ -42,7 +42,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // Set up session middleware with MySQL store
 app.use(session({
     key: 'session_cookie_name',
-    secret: process.env.SESSION_SECRET,
+    secret: a3$e8d1dG,
     store: sessionStore,
     resave: false,
     saveUninitialized: false,
