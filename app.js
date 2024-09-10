@@ -79,6 +79,11 @@ app.get('/favicon.ico', (req, res) => {
     res.status(204).end();
 });
 
+// Health check endpoint for verifying server status
+app.get('/health', (req, res) => {
+    res.status(200).send('OK');
+});
+
 // Route for authentication
 app.use('/auth', (req, res, next) => {
     debug('Entering auth route');
@@ -124,8 +129,23 @@ app.use((err, req, res, next) => {
 });
 
 const port = process.env.PORT || 3000;
-app.listen(port, () => {
+const server = app.listen(port, () => {
     debug(`Server running at http://localhost:${port}`);
+});
+
+// Graceful shutdown
+process.on('SIGTERM', () => {
+    debug('SIGTERM signal received: closing HTTP server');
+    server.close(() => {
+        debug('HTTP server closed');
+    });
+});
+
+process.on('SIGINT', () => {
+    debug('SIGINT signal received: closing HTTP server');
+    server.close(() => {
+        debug('HTTP server closed');
+    });
 });
 
 module.exports = app;
