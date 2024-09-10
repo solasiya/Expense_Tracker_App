@@ -120,7 +120,7 @@ app.use((req, res) => {
     res.status(404).send('Page not found');
 });
 
-const PORT = 3000;
+const PORT = 34196;
 app.listen(PORT, () => {
     debug(`Server running at http://localhost:${PORT}`);
 });
