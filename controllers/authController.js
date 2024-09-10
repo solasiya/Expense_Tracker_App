@@ -2,9 +2,17 @@ const bcrypt = require('bcryptjs');
 const User = require('../models/User');
 const db = require('../config/db'); // Ensure this module is properly set up for executing SQL queries
 
-exports.register = (req, res) => {
-    const { username, email, password } = req.body;
-
+exports.register = async (req, res) => {
+    try {
+      const { username, email, password } = req.body;
+      const hashedPassword = await bcrypt.hash(password, 10);
+      const result = await User.create(username, email, hashedPassword);
+      // ... rest of the logic
+    } catch (error) {
+      console.error('[REGISTER] Error:', error);
+      res.status(500).json({ message: 'Registration failed' });
+    }
+  
     console.log('[REGISTER] Received registration data:', { username, email });
 
     bcrypt.hash(password, 10, (err, hashedPassword) => {
@@ -93,7 +101,7 @@ exports.login = (req, res) => {
                 }
                 console.log('[LOGIN] Session object after save:', req.session);
                 console.log('[LOGIN] Login successful for user:', username);
-                res.status(200).redirect('/expenses/view');
+                res.status(200).json({ message: 'Login successful', redirectUrl: '/expenses/view' });
             });
         });
     });
