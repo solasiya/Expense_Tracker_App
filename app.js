@@ -128,7 +128,7 @@ app.use((err, req, res, next) => {
     res.status(500).send('Internal Server Error');
 });
 
-const port = 34196 || 3000;
+const port = 5000;
 
 app.listen(port, () => {
     debug(`Server running at http://localhost:${port}`);
