@@ -1,8 +1,8 @@
 {
     "main": "app,js",
     "scripts": {
-        "start": "node app.js --omit=dev",
-        "test": "mocha test/test.js"
+        "install": "npm install --omit=dev"
+       
     },
     "dependencies": {
         "bcryptjs": "^2.4.3",
