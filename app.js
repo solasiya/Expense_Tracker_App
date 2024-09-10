@@ -110,11 +110,11 @@ app.use('/incomes', (req, res, next) => {
 
 // Default home page (login page)
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public/index.html'));
+    res.sendFile(path.join(__dirname, './public/login.html'));
 });
 
 // Serve static files from the 'public' directory
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, './public')));
 
 // Handle 404 errors
 app.use((req, res) => {
@@ -128,8 +128,9 @@ app.use((err, req, res, next) => {
     res.status(500).send('Internal Server Error');
 });
 
-const port = 3306 || 3000;
-const server = app.listen(port, () => {
+const port = process.env.MYSQLPORT || 3000;
+
+app.listen(port, () => {
     debug(`Server running at http://localhost:${port}`);
 });
 
