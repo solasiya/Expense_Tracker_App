@@ -119,9 +119,9 @@ app.use((req, res) => {
     res.status(404).send('Page not found');
 });
 
-const PORT = 3306;
-app.listen(PORT, () => {
-    debug(`Server running at http://localhost:${PORT}`);
+const port = 3306;
+app.listen(port, () => {
+    debug(`Server running at http://localhost:${port}`);
 });
 
 module.exports = app;
