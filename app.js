@@ -120,7 +120,7 @@ app.use((req, res) => {
     res.status(404).send('Page not found');
 });
 
-const PORT = process.env.MYSQLPORT || 5000;
+const PORT = 3000;
 app.listen(PORT, () => {
     debug(`Server running at http://localhost:${PORT}`);
 });
