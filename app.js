@@ -25,7 +25,6 @@ const sessionStoreOptions = {
     clearExpired: true,
     checkExpirationInterval: 60000 * 5,
     expiration: 60000 * 15,
-    connectTimeout: 10000 
 };
 
 const sessionStore = new MySQLStore(sessionStoreOptions);
